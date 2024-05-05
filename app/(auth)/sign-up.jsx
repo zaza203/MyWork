@@ -8,8 +8,10 @@ import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 
 import { createUser } from '../../lib/appwrite'
+import { useGlobalContext } from '../../context/GlobalProvider'
 
-const SignUn = () => {
+const SignUp = () => {
+  const { setUser, setIsLoggedIn } = useGlobalContext();
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [form, setForm] = useState({
     username: '',
@@ -27,7 +29,7 @@ const SignUn = () => {
     try {
       const result = await createUser(form.email, form.password, form.username)
       setUser(result);
-      setIsLogged(true);
+      setIsLoggedIn(true);
       //set it to global state...
 
       router.replace('/home')
@@ -87,4 +89,4 @@ const SignUn = () => {
   )
 }
 
-export default SignUn
+export default SignUp
